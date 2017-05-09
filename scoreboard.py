@@ -1,24 +1,40 @@
 #!/usr/bin/env python3
 
-import subprocess
+import time
+from xrcon.client import XRcon
 
-enter_stmt = "is now playing"
-players = []
+def server_parse_output(data):
+    print(data.decode('utf-8'))
 
-def parse_line(line):
-    global players
-    index = line.find(enter_stmt)
-    if index != -1:
-        index -= 3
-        name = line[:index]
-        players += (name, 0)
-        print("Player joined: " + name)
+# With a local xonotic server, a cycle of the while
+# loop requires nearly 700 ms
+def server_poll(server):
+    while True:
+        start=time.time()
+        #time.sleep(1.0 - ((time.time() - start) % 1.0))
+        try:
+            data = server.execute('status')
+        except ConnectionRefusedError:
+            print('Connection lost, quitting..')
+            quit()
+        else:
+            if data is not None:
+                server_parse_output(data)
+                print(time.time() - start)
 
 def main():
-    server = subprocess.Popen(["xonotic-dedicated"], stdout=subprocess.PIPE, universal_newlines=True)
-    while True:
-        line = server.stdout.readline()
-        parse_line(line)
+    rcon = XRcon('127.0.0.1', 26000, 'admin')
+
+    # connect() is not enough: to check if the server
+    # is up it is necessary to call execute()
+    rcon.connect()
+    try:
+        rcon.execute('status')
+    except ConnectionRefusedError:
+        print('Cannot connect to the server')
+        quit()
+    else:
+        server_poll(rcon)
 
 if __name__ == "__main__":
     main()
