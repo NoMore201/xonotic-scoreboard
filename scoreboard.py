@@ -1,40 +1,30 @@
 #!/usr/bin/env python3
 
-import time
-from xrcon.client import XRcon
+from flask import Flask, render_template, abort, jsonify
+from rcon import Server
 
-def server_parse_output(data):
-    print(data.decode('utf-8'))
+# application setup
 
-# With a local xonotic server, a cycle of the while
-# loop requires nearly 700 ms
-def server_poll(server):
-    while True:
-        start=time.time()
-        #time.sleep(1.0 - ((time.time() - start) % 1.0))
-        try:
-            data = server.execute('status')
-        except ConnectionRefusedError:
-            print('Connection lost, quitting..')
-            quit()
-        else:
-            if data is not None:
-                server_parse_output(data)
-                print(time.time() - start)
+app = Flask(__name__)
+server = Server()
 
-def main():
-    rcon = XRcon('127.0.0.1', 26000, 'admin')
+# please chromium, don't cache static data
+app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0
 
-    # connect() is not enough: to check if the server
-    # is up it is necessary to call execute()
-    rcon.connect()
+
+@app.route('/')
+def render_page():
+    return render_template('index.html')
+
+
+@app.route('/api/score', methods=['GET'])
+def get_score():
     try:
-        rcon.execute('status')
+        data = server.get_status()
     except ConnectionRefusedError:
-        print('Cannot connect to the server')
-        quit()
+        abort(503)
     else:
-        server_poll(rcon)
+        return data
 
-if __name__ == "__main__":
-    main()
+
+app.run(debug=True)
