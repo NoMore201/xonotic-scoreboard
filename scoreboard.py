@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-from flask import Flask, render_template, abort, jsonify
+from flask import Flask, render_template, abort
 from rcon import Server
 
 # application setup
