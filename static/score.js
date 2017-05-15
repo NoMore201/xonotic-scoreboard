@@ -1,4 +1,13 @@
+let messageBox =
+  document.getElementById('message');
+
 function parseData(str) {
+  if (str === "") {
+    messageBox.innerHTML =
+      'Cannot reach server';
+    return;
+  }
+ 
   let scoreLines = str.split('\n')
     .splice(7)
     .filter((s) => {
@@ -13,12 +22,12 @@ function parseData(str) {
     .match(/\w*/);
   
   // Debug output on the page
-  document.body.innerHTML += 
+  messageBox.innerHTML += 
     '<p>Num of players: ' +
     playersNum.toString() +
     '</p>';
   scoreLines.forEach((s) => {
-    document.body.innerHTML +=
+    messageBox.innerHTML +=
       '<br>' + s;
   });
 
@@ -32,10 +41,15 @@ function update() {
     method: 'GET',
     headers: headers
   })
-    .then((response) => (response.text()))
-    .then((text) => {
+    .then(response => {
+      return (response.status === 503) ?
+        "" : response.text();
+    })
+    .then(text => {
       parseData(text);
     });
 }
 
+// query takes ~ 750ms to complete
+// TODO: run script ~ every 2 seconds
 update();

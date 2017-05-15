@@ -11,10 +11,9 @@ class Server(object):
         rcon.connect()
         try:
             rcon.execute('status')
-            self.server = rcon
         except ConnectionRefusedError:
             print('Cannot connect to server')
-            quit()
+        self.server = rcon
 
     def get_status(self):
-            return self.server.execute('status').decode('utf-8')
+        return self.server.execute('status').decode('utf-8')
