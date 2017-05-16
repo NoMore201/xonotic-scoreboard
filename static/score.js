@@ -14,6 +14,37 @@ function parseData(str) {
       return (s.search(/^\#/) !== -1);
     });
 
+  let players =
+    scoreLines.map(str => {
+      /*
+       *  String output will be something like:
+       *  {1}    {2}      {3}         {4}
+       *  #<num> nickname <int:score> <time_elapsed>
+       *  
+       *  {1} we can ignore this
+       *  {2} nickname can cause problems while parsing,
+       *      especially if it contains some spaces. It
+       *      will be parsed last
+       *  {3} integer representing score
+       *  {4} time since this player joined the game
+       */
+
+      let prepared =
+        str.replace(/\ +/, ' ') // replace group of spaces with 1
+           .split(' ') //divide the string into groups (see above)
+           .reverse();
+
+      let nickname =
+        prepared.slice(2, prepared.length-1);
+
+      return {
+        "nickname": nickname,
+        "score": prepared[1],
+        "time": prepared[0]
+      };
+
+    });
+
   // fetch the part of the player string
   // where active players are saved
   let playersNum = str
