@@ -30,7 +30,7 @@ function parseData(str) {
        */
 
       let prepared =
-        str.replace(/\ +/, ' ') // replace group of spaces with 1
+        str.replace(/\ +/g, ' ') // replace group of spaces with 1
            .split(' ') //divide the string into groups (see above)
            .reverse();
 
@@ -38,7 +38,9 @@ function parseData(str) {
         prepared.slice(2, prepared.length-1);
 
       return {
-        "nickname": nickname,
+        "nickname": nickname.length === 1 ?
+	      nickname[0] :
+	      nickname.join(),
         "score": prepared[1],
         "time": prepared[0]
       };
@@ -57,9 +59,13 @@ function parseData(str) {
     '<p>Num of players: ' +
     playersNum.toString() +
     '</p>';
-  scoreLines.forEach((s) => {
+  
+  // Printing players info
+  players.forEach(pl => {
     messageBox.innerHTML +=
-      '<br>' + s;
+      '<p>' + pl.nickname +
+      ' ' + pl.score +
+      ' ' + pl.time + '</p>';
   });
 
   // Here we should fetch the players data
