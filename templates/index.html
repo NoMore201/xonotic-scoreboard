@@ -15,9 +15,12 @@
     <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>-->
   </head>
   <body>
-    <h1>Xonotic scoreboard test</h1>
-    <div id="message"></div>
-    
+    <div id="container">
+      <div id="title">Xonotic Scoreboard</div>
+      <div id="info"></div>
+      <div id="score"></div>
+    </div>
+
     <script src="{{ url_for('static', filename='score.js') }}"></script>
   </body>
 </html>
