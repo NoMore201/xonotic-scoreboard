@@ -1,0 +1,12 @@
+@font-face {
+    font-family: 'xoloniumregular';
+    src: url('./font/xolonium-regular-webfont.woff2') format('woff2'),
+         url('./font/xolonium-regular-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+body {
+    font-family: xoloniumregular;
+}
