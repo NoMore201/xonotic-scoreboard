@@ -10,24 +10,64 @@
 body {
     font-family: xoloniumregular;
     text-shadow: 1px 1px 2px black;
-    background-color: #282828;
+    background-color: #212121;
     color: #F9F9F9;
 }
 
 #container {
-    width: 700px;
+    display: flex;
+    flex-direction: column;
+    width: 1000px;
     margin: 0 auto;
 }
 
-#info {
+.inforow {
+    width: 1000px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.infobox > span {
     font-size: 26px;
+    color: #00ff00;
+    font-weight: bold;
+}
+
+.infobox {
+    font-size: 24px;
 }
 
 #title {
-    font-size: 50px;
+    font-size: 70px;
+    text-align: center;
+    color: #00ff00;
 }
 
 #scoreTable {
-    width: 500px;
+    width: 700px;
+    font-size: 22px;
     margin: 0 auto;
+}
+
+#scoreTable > thead {
+    text-align: left;
+    color: #00ff00;
+}
+
+#footer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    position: absolute;
+    bottom: 0;
+    width: 98%;
+    height: 20px;
+    color: #E9E9E9;
+    font-size: 18px;
+}
+
+#footer > a {
+    color: #E9E9E9;
+    margin-right: 10px;
 }

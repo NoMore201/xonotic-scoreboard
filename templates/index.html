@@ -8,17 +8,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <link href="{{ url_for('static', filename='score.css') }}" rel="stylesheet">
-    <!--    <link href="{{ url_for('static', filename='css/bootstrap.min.css') }}" rel="stylesheet">
-    <link href="{{ url_for('static', filename='css/bootstrap-theme.min.css') }}" rel="stylesheet">
-    
-    <script src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>
-    <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>-->
   </head>
   <body>
     <div id="container">
-      <div id="title">Xonotic Scoreboard</div>
-      <div id="info"></div>
+      <div id="title">Scoreboard - LanPatio</div><br>
+      <div class="inforow">
+      	<div id="name-info" class="infobox">--</div>
+      	<div id="player-info" class="infobox">--</div>
+      </div><br>
       <div id="score"></div>
+    </div>
+
+    <div id="footer">
+      <a href="https://github.com/NoMore201/xonotic-scoreboard">Xonotic Scoreboard v 0.1</a>
+      <span id="server-stats"></span>
     </div>
 
     <script src="{{ url_for('static', filename='score.js') }}"></script>

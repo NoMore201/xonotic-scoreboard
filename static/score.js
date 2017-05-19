@@ -1,18 +1,23 @@
-let infoBox =
-  document.getElementById('info');
+let playerInfoBox =
+  document.getElementById('player-info');
+let nameInfoBox =
+  document.getElementById('name-info');
+let serverInfoBox =
+  document.getElementById('server-stats');
 let scoreBox =
   document.getElementById('score');
 
 function parseData(str) {
   if (str === "") {
-    infoBox.innerHTML =
-      'Cannot reach server';
+    // TODO: set error msg
     return;
   }
 
-  let scoreLines = str.split('\n')
+  let start = str.split('\n');
+
+  let scoreLines = start
     .splice(7)
-    .filter((s) => {
+    .filter(s => {
       return (s.search(/^\#/) !== -1);
     });
 
@@ -34,10 +39,10 @@ function parseData(str) {
       // In this way we will get all sections listed before
       // in an array.
       // The array is then reversed for convenience
-      let prepared =
-        str.replace(/\ +/g, ' ')
-           .split(' ')
-           .reverse();
+      let prepared = str
+        .replace(/\ +/g, ' ')
+        .split(' ')
+        .reverse();
 
       // why this? If name contains spaces, it
       // will be split in multiple arrays. Here
@@ -63,22 +68,38 @@ function parseData(str) {
 
   // fetch the part of the player string
   // where active players are saved
-  let playersNum = str
-    .split('\n')[5]
+  let playersNum = start[5]
     .substring(10, 18)
     .match(/\w*/);
 
-  infoBox.innerHTML +=
-    '<p>Num of players: ' +
-    playersNum.toString() +
-    '</p>';
+  let serverName = start[0]
+    .replace(/\ +/g, ' ')
+    .split(' ')
+    .slice(1)
+    .join(' ');
+
+  let serverInfo = start[4]
+    .replace(/\ +/g, ' ')
+    .split(' ')
+    .slice(1)
+    .join(' ');
+
+  nameInfoBox.innerHTML =
+    '<span>Server name: </span>' +
+    serverName;
+
+  playerInfoBox.innerHTML =
+    '<span># of players: </span>' +
+    playersNum;
+
+  serverInfoBox.innerHTML =
+    serverInfo;
 
   if (players !== []) {
 
     // sort players from highest score
     // to the lowest
     let sorted = players.sort((a,b) => {
-      console.log({a,b});
       return a.score < b.score;
     });
 
