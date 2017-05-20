@@ -2,7 +2,7 @@
 
 ## Description
 
-Simple xonotic web scoreboard written using Python3 and Flask (client written using standard html5+css+js, no libraries).
+Simple xonotic web scoreboard written using Python3 and Flask (client written using standard html5+css+js, no libraries). Check example.png for a preview :) .
 
 ## Requirements
 
