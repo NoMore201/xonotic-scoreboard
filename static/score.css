@@ -10,7 +10,8 @@
 body {
     font-family: xoloniumregular;
     text-shadow: 1px 1px 2px black;
-    background-color: #212121;
+    background: url('/static/background.png') no-repeat center center fixed;
+    background-color: #111111;
     color: #F9F9F9;
 }
 
@@ -22,37 +23,65 @@ body {
 }
 
 .inforow {
-    width: 1000px;
+    width: 900px;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    margin: 0 auto;
+    margin-bottom: 8px;
 }
 
 .infobox > span {
-    font-size: 26px;
+    font-size: 28px;
     color: #00ff00;
     font-weight: bold;
 }
 
 .infobox {
-    font-size: 24px;
+    font-size: 26px;
 }
 
 #title {
-    font-size: 70px;
+    font-size: 75px;
     text-align: center;
     color: #00ff00;
+    margin-bottom: 30px;
+}
+
+#error-msg {
+    color: #FF0000;
+    font-size: 50px;
+    width: 1000px;
+    text-align: center;
 }
 
 #scoreTable {
-    width: 700px;
-    font-size: 22px;
-    margin: 0 auto;
+    font-size: 30px;
+    text-align: left;
 }
 
 #scoreTable > thead {
-    text-align: left;
     color: #00ff00;
+    font-size: 34px;
+}
+
+.tdname {
+    width: 600px;
+}
+
+.tdscore {
+    width: 150px;
+}
+
+.tdtime {
+    width: 250px;
+}
+
+#logo {
+    position: absolute;
+    bottom: 40px;
+    width: 290px;
+    height: 90px;
 }
 
 #footer {
@@ -60,8 +89,8 @@ body {
     flex-direction: row;
     justify-content: space-between;
     position: absolute;
-    bottom: 0;
-    width: 98%;
+    bottom: 2px;
+    width: 99%;
     height: 20px;
     color: #E9E9E9;
     font-size: 18px;
@@ -69,5 +98,4 @@ body {
 
 #footer > a {
     color: #E9E9E9;
-    margin-right: 10px;
 }

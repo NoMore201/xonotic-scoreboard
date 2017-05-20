@@ -1,12 +1,11 @@
 #!/usr/bin/env python3
 
-from flask import Flask, render_template, abort
+from flask import Flask, render_template
 from rcon import Server
+from optparse import OptionParser
 
 # application setup
-
 app = Flask(__name__)
-server = Server()
 
 # please chromium, don't cache static data
 app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0
@@ -22,9 +21,28 @@ def get_score():
     try:
         data = server.get_status()
     except ConnectionRefusedError:
-        abort(503)
+        return ""
     else:
-        return data
+        if data is not None:
+            return data
+        return ""
 
 
-app.run(debug=True)
+if __name__ == '__main__':
+    parser = OptionParser()
+    parser.add_option('-d', '--debug', action='store_true',
+                      dest='debug', default=False,
+                      help='run server with debugging enabled')
+    parser.add_option('-x', '--host', dest='host', default='127.0.0.1',
+                      help='the host where xonotic server is running')
+    parser.add_option('-p', '--port', type='int', dest='port', default=26000,
+                      help='port where xonotic server is listening')
+    parser.add_option('-u', '--user', dest='user', default='admin',
+                      help='rcon user defined in xonotic server.cfg')
+    (options, args) = parser.parse_args()
+
+    server = Server(options.host, options.port, options.user)
+    if options.debug is True:
+        app.run(debug=True)
+    else:
+        app.run()

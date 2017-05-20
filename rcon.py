@@ -3,7 +3,7 @@ from xrcon.client import XRcon
 
 class Server(object):
 
-    def __init__(self, host='127.0.0.1', port='26000', rcon_user='admin'):
+    def __init__(self, host='127.0.0.1', port=26000, rcon_user='admin'):
         rcon = XRcon(host, port, rcon_user)
 
         # connect() is not enough: to check if the server

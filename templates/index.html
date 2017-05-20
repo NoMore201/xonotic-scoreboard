@@ -11,13 +11,17 @@
   </head>
   <body>
     <div id="container">
-      <div id="title">Scoreboard - LanPatio</div><br>
+      <div id="title">Scoreboard - LanPatio</div>
+      <div id="error-msg"></div>
       <div class="inforow">
-      	<div id="name-info" class="infobox">--</div>
-      	<div id="player-info" class="infobox">--</div>
-      </div><br>
+        <div id="name-info" class="infobox"></div>
+        <div id="player-info" class="infobox"></div>
+      </div>
       <div id="score"></div>
     </div>
+
+    <object id="logo" data="{{ url_for('static', filename='poulogo.svg') }}" type="image/svg+xml">
+    </object>
 
     <div id="footer">
       <a href="https://github.com/NoMore201/xonotic-scoreboard">Xonotic Scoreboard v 0.1</a>
