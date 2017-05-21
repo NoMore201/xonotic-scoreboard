@@ -22,10 +22,7 @@ def get_score():
         data = server.get_status()
     except ConnectionRefusedError:
         return ""
-    else:
-        if data is not None:
-            return data
-        return ""
+    return data
 
 
 if __name__ == '__main__':
