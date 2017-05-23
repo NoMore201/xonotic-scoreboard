@@ -12,7 +12,7 @@ Simple xonotic web scoreboard written using Python3 and Flask (client written us
 
 ## !! Important notes !!
 
-The xonotic server may give problems (`server denied rcon access to`) if the scoreboard is running on a different host (even if the ports are correctly forwarded and the rcon protocol is correctly set up). It is **recommended** to run the scoreboard on the same host as the xonotic server, and the access the html page from any host. The Flask web server is listening on port 5000.
+The xonotic server may give problems (`server denied rcon access to`) if the scoreboard is running on a different host (even if the ports are correctly forwarded and the rcon protocol is correctly set up). It is **recommended** to run the scoreboard on the same host as the xonotic server, and then access the web server from any host. The Flask web server is listening on port 5000.
 
 ```
 Usage: scoreboard.py [options]
