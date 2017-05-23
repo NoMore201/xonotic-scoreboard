@@ -3,20 +3,25 @@ let nameInfoBox = document.getElementById('name-info');
 let serverInfoBox = document.getElementById('server-stats');
 let scoreBox = document.getElementById('score');
 let errorBox = document.getElementById('error-msg');
+let mapInfoBox = document.getElementById('map-info');
 
 function resetView() {
   playerInfoBox.innerHTML = "";
   nameInfoBox.innerHTML = "";
   serverInfoBox.innerHTML = "";
   scoreBox.innerHTML = "";
-  
+  mapInfoBox.innerHTML = "";	
   errorBox.innerHTML = "Waiting for server...";
+}
+
+function parseScore(score) {
+  return score === -666 ? 'Spect' : parseInt(score);
 }
 
 function parseData(data) {
   if (data === "") {
     resetView();
-    
+
     return;
   }
 
@@ -26,10 +31,12 @@ function parseData(data) {
 
   serverInfoBox.innerHTML = data.stats;
 
-  nameInfoBox.innerHTML = '<span>Server name: </span>' +
+  nameInfoBox.innerHTML = '<span>Name: </span>' +
                           data.name;
-  playerInfoBox.innerHTML = '<span># of players: </span>' +
+  playerInfoBox.innerHTML = '<span>Players: </span>' +
                             parseInt(data.num);
+  mapInfoBox.innerHTML = '<span>Map: </span>' +
+                         data.map;
 
   if (data.players.length !== 0) {
     let table = "";
@@ -40,7 +47,7 @@ function parseData(data) {
     for (i = 0; i < data.players.length; i++) {
       table += '<tr>' +
               '<td class="tdname">'  + data.players[i].nick  + '</td>' +
-              '<td class="tdscore">' + data.players[i].score + '</td>' +
+              '<td class="tdscore">' + parseScore(data.players[i].score) + '</td>' +
               '<td class="tdtime">'  + data.players[i].time  + '</td></tr>';
     }
 

@@ -18,17 +18,17 @@ body {
 #container {
     display: flex;
     flex-direction: column;
-    width: 1000px;
+    width: 1100px;
     margin: 0 auto;
 }
 
 .inforow {
-    width: 900px;
+    width: 950px;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     margin: 0 auto;
-    margin-bottom: 8px;
+    margin-bottom: 20px;
 }
 
 .infobox > span {
@@ -51,13 +51,14 @@ body {
 #error-msg {
     color: #FF0000;
     font-size: 50px;
-    width: 1000px;
+    width: 1100px;
     text-align: center;
 }
 
 #scoreTable {
     font-size: 30px;
     text-align: left;
+    margin: 0 auto;
 }
 
 #scoreTable > thead {
