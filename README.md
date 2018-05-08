@@ -7,12 +7,20 @@ Simple xonotic web scoreboard written using Python3 and Flask (client written us
 ## Requirements
 
 * Python 3
-* Flask and XRcon packages: `pip3 install Flask XRcon`
+* Flask and XRcon packages: `pip install Flask XRcon`
 * A modern web-browser (Firefox/chromium)
 
-## !! Important notes !!
+## Required server config
 
-The xonotic server may give problems (`server denied rcon access to`) if the scoreboard is running on a different host (even if the ports are correctly forwarded and the rcon protocol is correctly set up). It is **recommended** to run the scoreboard on the same host as the xonotic server, and then access the web server from any host. The Flask web server is listening on port 5000.
+The server config file, located in `$HOME/.xonotic/data/server.cfg`, must have the
+following settings for the rcon protocol to work properly
+
+    port 26000 // be sure to provide same port to scoreboard
+    net_address 0.0.0.0
+    rcon_password "yoyo" // without a password rcon protocol is disabled
+
+Usually if you installed xonotic through your distro package manager, you can find a sample
+config file in `/usr/share/xonotic/server`, which you can edit.
 
 ```
 Usage: scoreboard.py [options]

@@ -1,3 +1,4 @@
 .jshintrc
 __pycache__/
 .tern-project
+.venv
