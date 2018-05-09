@@ -1,5 +1,7 @@
 # Xonotic Web Scoreboard
 
+![screenshot](https://github.com/NoMore201/xonotic-scoreboard/raw/master/example.png)
+
 ## Description
 
 Simple xonotic web scoreboard written using Python3 and Flask (client written using standard html5+css+js, no libraries). Check example.png for a preview :) .
