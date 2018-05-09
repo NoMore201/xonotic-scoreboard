@@ -7,14 +7,13 @@ Simple xonotic web scoreboard written using Python3 and Flask (client written us
 ## Requirements & Install
 
 * Python 3
-* Flask and XRcon packages: `pip install Flask XRcon`
+* Flask and XRcon packages
 * A modern web-browser (Firefox/chromium)
 
 Using a virtualenv:
-```
-pip install -r requirements.txt
-./scoreboard
-```
+
+    pip install -r requirements.txt
+    ./scoreboard
 
 ```
 Usage: scoreboard.py [options]
