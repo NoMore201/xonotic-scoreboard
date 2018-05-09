@@ -1,9 +1,12 @@
-let playerInfoBox = document.getElementById('player-info');
-let nameInfoBox = document.getElementById('name-info');
-let serverInfoBox = document.getElementById('server-stats');
-let scoreBox = document.getElementById('score');
-let errorBox = document.getElementById('error-msg');
-let mapInfoBox = document.getElementById('map-info');
+const playerInfoBox = document.getElementById('player-info');
+const nameInfoBox = document.getElementById('name-info');
+const serverInfoBox = document.getElementById('server-stats');
+const scoreBox = document.getElementById('score');
+const errorBox = document.getElementById('error-msg');
+const mapInfoBox = document.getElementById('map-info');
+
+const headers = new Headers();
+headers.append("Content-Type", "text/plain");
 
 function resetView() {
   playerInfoBox.innerHTML = "";
@@ -56,10 +59,7 @@ function parseData(data) {
   }
 }
 
-// TODO: handle fetch error
 function update() {
-  let headers = new Headers();
-  headers.append("Content-Type", "text/plain");
 
   fetch('/api/score', {
     method: 'GET',
@@ -75,8 +75,9 @@ function update() {
   }).catch(error => {
     resetView();
   });
+
 }
 
 // query takes ~ 750ms to complete
 update();
-setInterval(update, 5000);
+setInterval(update, 3000);
