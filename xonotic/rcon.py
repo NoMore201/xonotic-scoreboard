@@ -32,33 +32,22 @@ def rm_spaces(string):
     return re.sub(r'\ +', ' ', string)
 
 
-def get_players_num(output):
+def get_players_num(lines):
     """
     Take line 5 of the output, select the portion
     which contains the active players, and get the number
     """
-    num = re.search(r'\d+', output[5][10:19]).group(0)
-    return num
+    return lines[5].split(maxsplit=2)[1]
 
 
-def get_stats(output):
-    """
-    """
-    stats = rm_spaces(output[4]).split(' ')[1:]
-    stats = ' '.join(stats)
-    return stats
+def get_stats(lines):
+    return lines[4].split(maxsplit=1)[1]
 
+def get_map(lines):
+    return lines[3].split(maxsplit=1)[1]
 
-def get_map(output):
-    tmap = rm_spaces(output[3]).split(' ')[1]
-    return tmap
-
-def get_name(output):
-    """
-    """
-    name = rm_spaces(output[0]).split(' ')[1:]
-    name = ' '.join(name)
-    return name
+def get_name(lines):
+    return lines[0].split(maxsplit=1)[1]
 
 def parse_player(string):
     player = {'nick': '', 'score': -1, 'time': ''}
