@@ -50,25 +50,18 @@ def get_name(lines):
     return lines[0].split(maxsplit=1)[1]
 
 def parse_player(string):
-    player = {'nick': '', 'score': -1, 'time': ''}
-    temp = string.split(' ')[::-1]
-    player['nick'] = ' '.join(temp[2:-1][::-1])
-    player['score'] = int(temp[1])
-    player['time'] = temp[0]
-    return player
+    splitted = string.split()
+    return {'nick': ' '.join(splitted[1:][:-2]),
+           'score': splitted[-2],
+           'time': splitted[-1]}
 
-
-def get_score(output):
-    """
-    """
-    scorelines = [rm_spaces(x) for x in output
+def get_score(lines):
+    scorelines = [rm_spaces(x) for x in lines
                   if x != '' and x[0] == '#']
-    if scorelines != []:
-        players = []
-        for x in scorelines:
-            players.append(parse_player(x))
-        return players
-    return []
+    players = []
+    for x in scorelines:
+        players.append(parse_player(x))
+    return players
 
 
 class Server(object):
