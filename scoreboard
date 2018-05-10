@@ -34,7 +34,7 @@ if __name__ == '__main__':
                       help='the host where xonotic server is running')
     parser.add_argument('-p', '--port', type=int, dest='port', default=26000,
                       help='port where xonotic server is listening')
-    parser.add_argument('-r', '--rcon', dest='password', default='admin',
+    parser.add_argument('-r', '--rcon', dest='password', default='admin', required=True,
                       help='rcon password defined in xonotic server.cfg')
     options = parser.parse_args()
 
