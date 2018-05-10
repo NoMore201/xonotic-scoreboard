@@ -4,6 +4,8 @@ const serverInfoBox = document.getElementById('server-stats');
 const scoreBox = document.getElementById('score');
 const errorBox = document.getElementById('error-msg');
 const mapInfoBox = document.getElementById('map-info');
+const footer = document.getElementById("footer");
+const poulLogo = document.getElementById("logo");
 
 const headers = new Headers();
 headers.append("Content-Type", "text/plain");
@@ -18,7 +20,7 @@ function resetView() {
 }
 
 function parseScore(score) {
-  return score === -666 ? 'Spect' : parseInt(score);
+  return parseInt(score) === -666 ? 'Spect' : score;
 }
 
 function parseData(data) {
@@ -51,7 +53,7 @@ function parseData(data) {
             '<th class="tdname">Nickname</th><th class="tdscore">Score</th>' +
             '<th class="tdtime">Play Time</th></tr></thead><tbody>';
 
-    for (i = 0; i < data.players.length; i++) {
+    for (var i = 0; i < data.players.length; i++) {
       table += '<tr>' +
               '<td class="tdname">'  + data.players[i].nick  + '</td>' +
               '<td class="tdscore">' + parseScore(data.players[i].score) + '</td>' +
@@ -64,6 +66,14 @@ function parseData(data) {
 }
 
 function update() {
+
+  if (window.innerWidth < 1600) {
+    footer.style.display = "none";
+    poulLogo.style.display = "none";
+  } else {
+    footer.style.display = "flex";
+    poulLogo.style.display = "block";
+  }
 
   fetch('/api/score', {
     method: 'GET',
