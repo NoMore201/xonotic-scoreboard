@@ -2,7 +2,7 @@
 
 from flask import Flask, render_template
 from xonotic.rcon import Server
-from optparse import OptionParser
+import argparse
 
 # application setup
 app = Flask(__name__)
@@ -26,18 +26,17 @@ def get_score():
 
 
 if __name__ == '__main__':
-    parser = OptionParser()
-    parser.add_option('-d', '--debug', action='store_true',
-                      dest='debug', default=False,
-                      help='run server with debugging enabled')
-    parser.add_option('-x', '--host', dest='host', default='127.0.0.1',
+    parser = argparse.ArgumentParser()
+    parser.add_argument('-d', '--debug', action='store_true',
+                        dest='debug', default=False,
+                        help='run server with debugging enabled')
+    parser.add_argument('-x', '--host', dest='host', default='127.0.0.1',
                       help='the host where xonotic server is running')
-    parser.add_option('-p', '--port', type='int', dest='port', default=26000,
+    parser.add_argument('-p', '--port', type=int, dest='port', default=26000,
                       help='port where xonotic server is listening')
-    parser.add_option('-r', '--rcon', dest='password', default='admin',
-                      metavar='PASS',
+    parser.add_argument('-r', '--rcon', dest='password', default='admin',
                       help='rcon password defined in xonotic server.cfg')
-    (options, args) = parser.parse_args()
+    options = parser.parse_args()
 
     server = Server(options.host, options.port, options.password)
     if options.debug is True:
