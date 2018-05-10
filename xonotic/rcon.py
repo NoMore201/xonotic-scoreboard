@@ -56,10 +56,8 @@ def parse_player(string):
            'time': splitted[-1]}
 
 def get_score(lines):
-    scorelines = [rm_spaces(x) for x in lines
-                  if x != '' and x[0] == '#']
     players = []
-    for x in scorelines:
+    for x in lines:
         players.append(parse_player(x))
     return players
 
@@ -80,22 +78,16 @@ class Server(object):
 
 
     def parse(self, data):
-        # split the output string for each line
-        start = data.split('\n')
         # non-empty lines starting with a '#' are the actual scoreboard.
-        scorelines = [re.sub(r'\ +', ' ', x)
-                      for x in start if x != '' and x[0] == '#']
-        parsed_data = {'name': '', 'num': 0,
-                       'players': [], 'stats': '',
-                       'map': ''}
-        parsed_data['num'] = get_players_num(start)
-        parsed_data['name'] = get_name(start)
-        parsed_data['stats'] = get_stats(start)
-        parsed_data['players'] = sorted(get_score(start),
-                                        key=lambda x: x['score'],
-                                        reverse=True)
-        parsed_data['map'] = get_map(start)
-        return parsed_data
+        lines = [rm_spaces(x)
+                 for x in data.split('\n')
+                 if x != '']
+        scorelines = [x for x in lines if x[0] == '#']
+        return {'name': get_name(lines),
+                'num': get_players_num(lines),
+                'players': get_score(scorelines),
+                'stats': get_stats(lines),
+                'map': get_map(lines)}
 
     def get_status(self):
         data = self.server.execute('status')

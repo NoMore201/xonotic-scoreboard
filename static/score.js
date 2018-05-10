@@ -30,6 +30,10 @@ function parseData(data) {
 
   data = JSON.parse(data);
 
+  data.players.sort( function(a, b) {
+    return parseInt(b.score) - parseInt(a.score);
+  });
+
   errorBox.innerHTML = "";
 
   serverInfoBox.innerHTML = data.stats;
